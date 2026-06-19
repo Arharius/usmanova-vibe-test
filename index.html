@@ -10,15 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink: #f45b9b;
-      --pink-dark: #ef3f8d;
-      --text: #171217;
-      --muted: #786f76;
-      --soft: #fff2f8;
-      --line: #eadfe5;
-      --dark: #180f18;
-      --radius: 30px;
-      --container: 1160px;
+      --pink: #f65b9b;
+      --pink-dark: #ee3f8b;
+      --text: #151217;
+      --muted: #6f686e;
+      --page: #f2f2f2;
+      --card: #fff;
+      --line: #f3b7d1;
+      --dark: #1b1019;
+      --container: 1180px;
     }
 
     * { box-sizing: border-box; }
@@ -35,23 +35,16 @@
 
     a { color: inherit; text-decoration: none; }
 
-    button,
-    input,
-    select,
-    textarea { font: inherit; }
+    button, input, select, textarea { font: inherit; }
 
     .container {
       width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
     }
 
-    .screen {
-      padding: 88px 0;
-    }
-
     .btn {
-      min-height: 72px;
-      padding: 0 44px;
+      min-height: 68px;
+      padding: 0 42px;
       border: 0;
       border-radius: 999px;
       background: var(--pink);
@@ -60,13 +53,13 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 18px;
-      letter-spacing: .07em;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      box-shadow: 0 16px 34px rgba(244, 91, 155, .22);
-      transition: .18s ease;
       text-align: center;
+      box-shadow: 0 16px 34px rgba(246, 91, 155, .22);
+      transition: transform .18s ease, background .18s ease;
     }
 
     .btn:hover {
@@ -78,85 +71,91 @@
 
     .btn.small {
       min-height: 54px;
-      padding: 0 26px;
-      font-size: 14px;
+      padding: 0 28px;
+      font-size: 16px;
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 500;
     }
 
     .hero {
       min-height: 100vh;
+      padding: 52px 0 70px;
       display: flex;
       align-items: center;
-      padding: 42px 0 70px;
+      background: #fff;
       overflow: hidden;
     }
 
-    .hero-grid {
+    .hero-card {
       display: grid;
       grid-template-columns: 52% 48%;
+      grid-template-areas:
+        "head photo"
+        "bottom photo";
+      gap: 26px 30px;
       align-items: center;
-      gap: 28px;
     }
 
-    .hero-copy {
+    .hero-head {
+      grid-area: head;
       max-width: 640px;
-      padding-left: clamp(0px, 2.6vw, 38px);
+      padding-left: clamp(0px, 2vw, 34px);
+    }
+
+    .hero-bottom {
+      grid-area: bottom;
+      max-width: 590px;
+      padding-left: clamp(0px, 2vw, 34px);
+    }
+
+    .hero-photo {
+      grid-area: photo;
+      position: relative;
+      min-height: 590px;
+      align-self: stretch;
     }
 
     .hero h1 {
       margin: 0;
       color: var(--pink);
+      font-size: clamp(36px, 3.35vw, 50px);
+      line-height: 1.17;
       font-weight: 800;
-      font-size: clamp(34px, 3.15vw, 44px);
-      line-height: 1.18;
-      letter-spacing: .01em;
+      letter-spacing: .012em;
       text-transform: uppercase;
-      max-width: 590px;
     }
 
-    .hero h1 span {
-      display: block;
-      white-space: nowrap;
-    }
+    .hero h1 span { display: block; white-space: nowrap; }
 
     .hero-sub {
-      margin: 28px 0 0;
+      margin: 34px 0 0;
       color: var(--pink);
-      font-size: clamp(22px, 2vw, 28px);
-      line-height: 1.34;
+      font-size: clamp(23px, 2.05vw, 31px);
+      line-height: 1.35;
       font-weight: 400;
     }
 
     .hero-text {
-      margin: 48px 0 0;
-      max-width: 560px;
-      color: var(--text);
-      font-size: clamp(18px, 1.45vw, 22px);
-      line-height: 1.42;
+      margin: 0 0 46px;
+      max-width: 570px;
+      font-size: clamp(18px, 1.45vw, 23px);
+      line-height: 1.43;
       font-weight: 400;
-    }
-
-    .hero-action {
-      margin-top: 48px;
     }
 
     .vpn-note {
       margin-top: 18px;
       color: #928991;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.35;
-    }
-
-    .hero-photo {
-      position: relative;
-      min-height: 560px;
-      align-self: stretch;
     }
 
     .hero-photo img {
       position: absolute;
-      right: -22px;
+      right: -24px;
       bottom: -18px;
-      width: min(560px, 104%);
+      width: min(590px, 106%);
       max-width: none;
       display: block;
     }
@@ -165,25 +164,26 @@
       content: "";
       position: absolute;
       left: 0;
-      right: -70px;
+      right: -80px;
       bottom: -30px;
       height: 150px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 72%);
+      background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 74%);
       pointer-events: none;
     }
 
-    .section-title {
-      margin: 0 0 42px;
-      color: var(--pink);
-      font-size: clamp(34px, 4vw, 58px);
-      line-height: 1.15;
-      font-weight: 800;
-      letter-spacing: .02em;
-      text-transform: uppercase;
+    .programs {
+      padding: 88px 0;
+      background: #fff;
     }
 
-    .programs {
-      background: #fff;
+    .section-title {
+      margin: 0 0 50px;
+      color: var(--pink);
+      font-size: clamp(38px, 4.6vw, 70px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: .015em;
+      text-transform: uppercase;
     }
 
     .program-grid {
@@ -193,25 +193,29 @@
     }
 
     .program-card {
-      min-height: 500px;
       position: relative;
+      min-height: 500px;
       overflow: hidden;
+      border: 1.5px solid rgba(246, 91, 155, .28);
       border-radius: 34px;
-      border: 1px solid rgba(244, 91, 155, .16);
-      background: linear-gradient(180deg, #fff8fb 0%, #ffe6f1 100%);
-      box-shadow: 0 20px 52px rgba(244, 91, 155, .13);
+      background: #fff8fb;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+    }
+
+    .program-card.featured {
+      border-width: 3px;
+      border-color: var(--pink);
     }
 
     .program-card img {
       position: absolute;
       top: 18px;
       left: 50%;
-      transform: translateX(-50%);
       width: 92%;
       height: 64%;
+      transform: translateX(-50%);
       object-fit: contain;
       object-position: center bottom;
     }
@@ -219,113 +223,124 @@
     .program-body {
       position: relative;
       z-index: 1;
-      padding: 26px;
-      background: linear-gradient(to top, rgba(255,255,255,.98), rgba(255,255,255,.74));
+      padding: 28px;
+      background: rgba(255,255,255,.9);
       backdrop-filter: blur(8px);
     }
 
     .tag {
       display: inline-flex;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: #fde1ed;
       color: var(--pink);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .12em;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .04em;
       text-transform: uppercase;
     }
 
     .program-card h3 {
-      margin: 0 0 10px;
+      margin: 0 0 16px;
       font-size: 28px;
-      line-height: 1.06;
-      font-weight: 800;
-      letter-spacing: -.02em;
-    }
-
-    .program-card p {
-      margin: 0 0 20px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.42;
+      line-height: 1.12;
       font-weight: 500;
     }
 
+    .program-card p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.45;
+      font-weight: 400;
+    }
+
     .guarantee-form {
+      padding: 88px 0;
+      background: var(--page);
+    }
+
+    .guarantees-title {
+      margin: 0 auto 38px;
+      max-width: 900px;
+      text-align: center;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.22;
+      font-weight: 400;
+    }
+
+    .guarantees-title span { color: var(--pink); }
+
+    .guarantees-card {
+      max-width: 920px;
+      margin: 0 auto 54px;
+      padding: 42px 48px;
+      border-radius: 44px;
       background: #fff;
-    }
-
-    .gf-grid {
-      display: grid;
-      grid-template-columns: 45% 55%;
-      gap: 36px;
-      align-items: stretch;
-    }
-
-    .guarantees,
-    .form-panel {
-      border-radius: 34px;
-      padding: 42px;
-    }
-
-    .guarantees {
-      border: 1px solid var(--line);
-      box-shadow: 0 18px 52px rgba(0,0,0,.05);
-      background: #fff;
-    }
-
-    .guarantees h2,
-    .form-panel h2 {
-      margin: 0;
-      font-size: clamp(32px, 3.2vw, 46px);
-      line-height: 1.12;
-      font-weight: 800;
-      letter-spacing: -.035em;
     }
 
     .guarantee-list {
       display: grid;
-      gap: 16px;
-      margin-top: 34px;
+      gap: 34px;
     }
 
     .guarantee-item {
-      display: block;
-      padding: 20px 22px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: #fff;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 22px;
+      align-items: start;
     }
-    .icon {
-      display: none;
+
+    .shield {
+      width: 44px;
+      height: 48px;
+      display: block;
+      color: var(--pink);
+    }
+
+    .shield svg {
+      width: 44px;
+      height: 48px;
+      display: block;
     }
 
     .guarantee-item strong {
       display: block;
-      margin-bottom: 5px;
-      font-size: 18px;
-      line-height: 1.2;
-      font-weight: 800;
+      margin: 0 0 8px;
+      font-size: 25px;
+      line-height: 1.35;
+      font-weight: 400;
     }
 
-    .guarantee-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.38;
-      font-weight: 500;
+    .guarantee-item p {
+      margin: 0;
+      color: #686168;
+      font-size: 22px;
+      line-height: 1.55;
+      font-weight: 400;
     }
 
     .form-panel {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 44px;
+      border-radius: 34px;
       color: #fff;
       background:
-        radial-gradient(circle at 92% 0%, rgba(244,91,155,.38), transparent 15rem),
+        radial-gradient(circle at 92% 0%, rgba(246,91,155,.38), transparent 15rem),
         linear-gradient(145deg, #171018 0%, #291724 100%);
       box-shadow: 0 24px 64px rgba(42, 23, 37, .17);
     }
 
     .form-panel h2 {
+      margin: 0;
       color: #fff;
-      max-width: 620px;
+      font-size: clamp(32px, 3.2vw, 46px);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -.035em;
     }
 
     .form-lead {
@@ -336,10 +351,7 @@
       font-weight: 600;
     }
 
-    form {
-      display: grid;
-      gap: 16px;
-    }
+    form { display: grid; gap: 16px; }
 
     label {
       display: grid;
@@ -349,9 +361,7 @@
       font-weight: 700;
     }
 
-    input,
-    select,
-    textarea {
+    input, select, textarea {
       width: 100%;
       min-height: 58px;
       padding: 0 18px;
@@ -378,8 +388,8 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: rgba(244,91,155,.86);
-      box-shadow: 0 0 0 4px rgba(244,91,155,.18);
+      border-color: rgba(246,91,155,.86);
+      box-shadow: 0 0 0 4px rgba(246,91,155,.18);
     }
 
     .notice {
@@ -439,32 +449,47 @@
     }
 
     .footer {
-      padding: 34px 0 46px;
+      padding: 32px 0 42px;
       color: var(--muted);
       font-size: 14px;
       text-align: center;
+      background: var(--page);
     }
 
+    @media (max-width: 980px) {
+      body { background: var(--page); }
 
-    @media (max-width: 900px) {
+      .container {
+        width: min(100% - 32px, var(--container));
+      }
+
       .hero {
         min-height: auto;
-        padding: 60px 0 0;
+        padding: 18px 0 0;
+        background: var(--page);
+        display: block;
       }
 
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+      .hero-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 28px 28px 34px;
+        border-radius: 24px 24px 0 0;
+        background: #fff;
+        text-align: center;
       }
 
-      .hero-copy {
-        max-width: 700px;
+      .hero-head,
+      .hero-bottom {
+        max-width: none;
         padding-left: 0;
       }
 
       .hero h1 {
-        font-size: clamp(30px, 8vw, 38px);
-        max-width: 100%;
+        font-size: clamp(29px, 8vw, 38px);
+        line-height: 1.18;
+        letter-spacing: .005em;
       }
 
       .hero h1 span {
@@ -472,198 +497,331 @@
       }
 
       .hero-sub {
-        margin-top: 26px;
-      }
-
-      .hero-text {
-        margin-top: 30px;
-      }
-
-      .hero-action {
-        margin-top: 34px;
+        margin-top: 24px;
+        font-size: clamp(21px, 5.4vw, 28px);
+        line-height: 1.33;
       }
 
       .hero-photo {
-        min-height: 340px;
+        width: 100%;
+        min-height: 520px;
+        margin-top: 26px;
+        align-self: auto;
       }
 
       .hero-photo img {
         left: 50%;
         right: auto;
-        bottom: -18px;
-        width: min(420px, 92vw);
+        bottom: -8px;
+        width: min(510px, 96vw);
         transform: translateX(-50%);
       }
 
-      .program-grid {
-        display: flex;
-        overflow-x: auto;
-        gap: 18px;
-        padding-bottom: 12px;
-        scroll-snap-type: x mandatory;
-      }
-
-      .program-card {
-        flex: 0 0 min(390px, 82vw);
-        min-height: 500px;
-        scroll-snap-align: start;
-      }
-
-      .gf-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .container {
-        width: min(100% - 28px, var(--container));
-      }
-
-      .screen {
-        padding: 54px 0;
-      }
-
-      .hero {
-        padding-top: 28px;
-        padding-bottom: 32px;
-      }
-
-      .hero h1 {
-        font-size: clamp(25px, 8vw, 31px);
-        line-height: 1.15;
-        letter-spacing: .005em;
-      }
-
-      .hero-sub {
-        margin-top: 18px;
-        font-size: 18px;
-        line-height: 1.32;
+      .hero-photo::after {
+        left: 0;
+        right: 0;
+        bottom: -12px;
+        height: 135px;
+        background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 76%);
       }
 
       .hero-text {
-        margin-top: 22px;
-        font-size: 15px;
+        margin: 18px auto 30px;
+        max-width: 620px;
+        font-size: clamp(18px, 4.4vw, 23px);
         line-height: 1.42;
       }
 
       .btn {
         width: 100%;
-        min-height: 56px;
+        min-height: 70px;
         padding: 0 20px;
-        font-size: 14px;
+        font-size: 18px;
+      }
+
+      .btn.small {
+        width: auto;
+        min-height: 58px;
+        padding: 0 30px;
+        font-size: 22px;
+      }
+
+      .vpn-note {
+        margin-top: 20px;
+        font-size: 15px;
+      }
+
+      .programs {
+        padding: 74px 0;
+        background: var(--page);
+      }
+
+      .section-title {
+        margin-bottom: 38px;
+        color: var(--text);
+        font-size: clamp(35px, 8vw, 52px);
+        line-height: 1.15;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-align: center;
+        text-transform: none;
+      }
+
+      .program-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .program-card {
+        min-height: 520px;
+        display: grid;
+        grid-template-columns: 52% 48%;
+        border-radius: 28px;
+        background: #fff;
+        border: 0;
+      }
+
+      .program-card.featured {
+        border: 3px solid var(--pink);
+      }
+
+      .program-card img {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: 100%;
+        transform: none;
+        object-fit: contain;
+        object-position: left bottom;
+        align-self: end;
+      }
+
+      .program-body {
+        padding: 38px 34px 34px 12px;
+        background: transparent;
+        backdrop-filter: none;
+        align-self: center;
+      }
+
+      .tag {
+        margin-bottom: 22px;
+        padding: 14px 28px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .program-card h3 {
+        margin-bottom: 24px;
+        font-size: 29px;
+        line-height: 1.2;
+        font-weight: 400;
+      }
+
+      .program-card p {
+        font-size: 23px;
+        line-height: 1.38;
+      }
+
+      .guarantee-form {
+        padding: 74px 0;
+        background: var(--page);
+      }
+
+      .guarantees-title {
+        margin-bottom: 28px;
+        max-width: 720px;
+        font-size: clamp(31px, 7vw, 44px);
+      }
+
+      .guarantees-card {
+        padding: 36px 36px;
+        border-radius: 38px;
+      }
+
+      .guarantee-list {
+        gap: 34px;
+      }
+
+      .guarantee-item {
+        grid-template-columns: 42px 1fr;
+        gap: 20px;
+      }
+
+      .shield,
+      .shield svg {
+        width: 42px;
+        height: 46px;
+      }
+
+      .guarantee-item strong {
+        font-size: 27px;
+      }
+
+      .guarantee-item p {
+        font-size: 24px;
+        line-height: 1.58;
+      }
+
+      .form-panel {
+        padding: 36px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 20px, var(--container));
+      }
+
+      .hero-card {
+        padding: 24px 20px 30px;
+      }
+
+      .hero h1 {
+        font-size: clamp(25px, 7.6vw, 31px);
+      }
+
+      .hero-sub {
+        font-size: clamp(18px, 5.1vw, 23px);
+      }
+
+      .hero-photo {
+        min-height: 430px;
+        margin-top: 24px;
+      }
+
+      .hero-photo img {
+        width: min(420px, 102vw);
+      }
+
+      .hero-text {
+        font-size: 17px;
+      }
+
+      .btn {
+        min-height: 62px;
+        font-size: 15px;
+      }
+
+      .program-card {
+        min-height: 430px;
+        grid-template-columns: 52% 48%;
+      }
+
+      .program-body {
+        padding: 30px 22px 26px 8px;
+      }
+
+      .tag {
+        padding: 11px 22px;
+        font-size: 15px;
+      }
+
+      .program-card h3 {
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+
+      .program-card p {
+        font-size: 16px;
+        line-height: 1.4;
       }
 
       .btn.small {
         min-height: 52px;
-        font-size: 13px;
+        font-size: 17px;
+        padding: 0 24px;
       }
 
-      .vpn-note {
-        text-align: center;
-        font-size: 13px;
-      }
-
-      .hero-photo {
-        min-height: 245px;
-        margin-top: 8px;
-      }
-
-      .hero-photo img {
-        width: min(310px, 88vw);
-        bottom: -12px;
-      }
-
-      .section-title {
-        font-size: 31px;
-        margin-bottom: 26px;
-      }
-
-      .program-card {
-        flex-basis: 86vw;
-        min-height: 470px;
-      }
-
-      .program-body {
-        padding: 22px;
-      }
-
-      .program-card h3 {
-        font-size: 25px;
-      }
-
-      .guarantees,
-      .form-panel {
-        border-radius: 28px;
-        padding: 24px;
-      }
-
-      .guarantees h2,
-      .form-panel h2 {
+      .guarantees-title {
         font-size: 30px;
       }
 
-      .guarantee-item {
-        grid-template-columns: 44px 1fr;
-        gap: 14px;
-        padding: 16px;
+      .guarantees-card {
+        padding: 30px 24px;
+        border-radius: 34px;
       }
-    .icon {
-      display: none;
-    }
+
+      .guarantee-item {
+        grid-template-columns: 34px 1fr;
+        gap: 16px;
+      }
+
+      .shield,
+      .shield svg {
+        width: 34px;
+        height: 38px;
+      }
 
       .guarantee-item strong {
-        font-size: 16px;
+        font-size: 21px;
       }
 
-      .guarantee-item span {
-        font-size: 14px;
+      .guarantee-item p {
+        font-size: 18px;
+      }
+
+      .form-panel {
+        padding: 28px 22px;
+        border-radius: 28px;
+      }
+
+      .form-panel h2 {
+        font-size: 30px;
       }
 
       .form-lead {
         font-size: 16px;
       }
 
-      input,
-      select,
-      textarea {
-        min-height: 56px;
+      input, select, textarea {
+        min-height: 54px;
         font-size: 15px;
       }
-
     }
   </style>
 </head>
 <body>
   <main>
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <h1 id="hero-title"><span>Приведите тело в форму</span><span>с чемпионкой Катей</span><span>Усмановой</span></h1>
-          <p class="hero-sub">без диет, голода и запретов<br>с пользой для здоровья</p>
-          <p class="hero-text">Похудеть, подтянуть попу и живот, набрать форму в зале, восстановиться после родов — тренировки и питание под вашу цель</p>
-          <div class="hero-action">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-head">
+            <h1 id="hero-title">
+              <span>Приведите тело в форму</span>
+              <span>с чемпионкой Катей</span>
+              <span>Усмановой</span>
+            </h1>
+            <p class="hero-sub">без диет, голода и запретов<br>с пользой для здоровья</p>
+          </div>
+
+          <div class="hero-photo" aria-label="Катя Усманова">
+            <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/8d7e3aa384b597937b9504925ead6325.png/s/s1200x/a/934144/sc/68" alt="Катя Усманова с гантелью">
+          </div>
+
+          <div class="hero-bottom">
+            <p class="hero-text">Похудеть, подтянуть попу и живот, набрать форму в зале, восстановиться после родов — тренировки и питание под вашу цель</p>
             <a class="btn" href="#programs">Выбрать программу</a>
             <div class="vpn-note">Для корректной работы сайта отключите VPN</div>
           </div>
         </div>
-
-        <div class="hero-photo" aria-label="Катя Усманова">
-          <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/8d7e3aa384b597937b9504925ead6325.png/s/s1200x/a/934144/sc/68" alt="Катя Усманова с гантелью">
-        </div>
       </div>
     </section>
 
-    <section class="programs screen" id="programs" aria-labelledby="programs-title">
+    <section class="programs" id="programs" aria-labelledby="programs-title">
       <div class="container">
-        <h2 class="section-title" id="programs-title">Выберите программу<br>под вашу цель</h2>
+        <h2 class="section-title" id="programs-title">Тренировки дома</h2>
 
         <div class="program-grid">
-          <article class="program-card">
+          <article class="program-card featured">
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/129/h/9993958238de93cfb42027db3748b8fe.png" alt="Метод Усмановой">
             <div class="program-body">
               <span class="tag">Флагман</span>
               <h3>Метод Усмановой</h3>
-              <p>Базовая программа для входа в регулярные тренировки и безопасного старта.</p>
+              <p>Освоите технику и втянетесь в регулярные тренировки — без травм и через силу.</p>
               <button class="btn small" type="button" data-program="Метод Усмановой">Подробнее</button>
             </div>
           </article>
@@ -672,8 +830,8 @@
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/243/h/b425fe3374dfff385aa5305db7156a5f.png" alt="Марафон стройности">
             <div class="program-body">
               <span class="tag">Марафон</span>
-              <h3>Марафон стройности</h3>
-              <p>Формат для первых видимых изменений: тонус, лёгкость и регулярность.</p>
+              <h3>Стройности</h3>
+              <p>Первый видимый результат за 21 день — появляется тонус и лёгкость.</p>
               <button class="btn small" type="button" data-program="Марафон стройности">Подробнее</button>
             </div>
           </article>
@@ -681,9 +839,9 @@
           <article class="program-card">
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/265/h/d8acf94578d7aa9c71f7b487c818a4b4.png" alt="Упругая попа 1.0">
             <div class="program-body">
-              <span class="tag">Ягодицы</span>
+              <span class="tag">Марафон</span>
               <h3>Упругая попа 1.0</h3>
-              <p>Программа с акцентом на ягодицы: форму, тонус и понятную технику.</p>
+              <p>Первый объём и подтянутость ягодиц — с собственным весом.</p>
               <button class="btn small" type="button" data-program="Упругая попа 1.0">Подробнее</button>
             </div>
           </article>
@@ -691,31 +849,35 @@
       </div>
     </section>
 
-    <section class="guarantee-form screen" id="start" aria-labelledby="start-title">
-      <div class="container gf-grid">
-        <div class="guarantees">
-          <h2>Программы Кати Усмановой — это гарантия</h2>
+    <section class="guarantee-form" id="start" aria-labelledby="start-title">
+      <div class="container">
+        <h2 class="guarantees-title">Программы <span>Кати Усмановой —</span><br>это всегда гарантия</h2>
 
+        <div class="guarantees-card">
           <div class="guarantee-list">
             <div class="guarantee-item">
-              <div>
-                <strong>Гарантия цены</strong>
-                <span>Программа, материалы и поддержка собраны в одном формате.</span>
-              </div>
+              <span class="shield" aria-hidden="true"><svg viewBox="0 0 48 54"><path d="M24 3 42 9v14c0 13-7.5 22.5-18 27C13.5 45.5 6 36 6 23V9l18-6Z" fill="#ff9bc8"/><text x="24" y="33" text-anchor="middle" font-size="20" font-weight="700" fill="#f65b9b">₽</text></svg></span>
+              <div><strong>Гарантия лучшей цены</strong><p>Самая лояльная цена на рынке фитнеса для комплекта тренировок с таким глубоким содержанием программ.</p></div>
             </div>
 
             <div class="guarantee-item">
-              <div>
-                <strong>Гарантия результата</strong>
-                <span>Понятные задания помогают двигаться регулярно и видеть прогресс.</span>
-              </div>
+              <span class="shield" aria-hidden="true"><svg viewBox="0 0 48 54"><path d="M24 3 42 9v14c0 13-7.5 22.5-18 27C13.5 45.5 6 36 6 23V9l18-6Z" fill="#ff9bc8"/><path d="m17 28 5 5 10-13" stroke="#f65b9b" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <div><strong>Гарантия результата при соблюдении всех рекомендаций</strong><p>Задания и рекомендации помогают закреплять результат и мотивируют двигаться дальше.</p></div>
             </div>
 
             <div class="guarantee-item">
-              <div>
-                <strong>Гарантия структуры</strong>
-                <span>Тренировки, питание и рекомендации находятся в одном месте.</span>
-              </div>
+              <span class="shield" aria-hidden="true"><svg viewBox="0 0 48 54"><path d="M24 3 42 9v14c0 13-7.5 22.5-18 27C13.5 45.5 6 36 6 23V9l18-6Z" fill="#ff9bc8"/><circle cx="24" cy="25" r="8" fill="#f65b9b"/><circle cx="24" cy="17" r="4" fill="#f65b9b"/></svg></span>
+              <div><strong>Гарантия уникальности программ</strong><p>Все программы тренировок разработаны лично Катей Усмановой и проверены на её опыте.</p></div>
+            </div>
+
+            <div class="guarantee-item">
+              <span class="shield" aria-hidden="true"><svg viewBox="0 0 48 54"><path d="M24 3 42 9v14c0 13-7.5 22.5-18 27C13.5 45.5 6 36 6 23V9l18-6Z" fill="#ff9bc8"/><path d="m16 27 6 6 11-13" stroke="#f65b9b" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <div><strong>Гарантия соблюдения сроков обучения</strong><p>Все программы будут открыты в указанный срок с согласованным доступом.</p></div>
+            </div>
+
+            <div class="guarantee-item">
+              <span class="shield" aria-hidden="true"><svg viewBox="0 0 48 54"><path d="M24 3 42 9v14c0 13-7.5 22.5-18 27C13.5 45.5 6 36 6 23V9l18-6Z" fill="#ff9bc8"/><path d="M24 17a7 7 0 0 0-4 13v5h8v-5a7 7 0 0 0-4-13Z" fill="#f65b9b"/></svg></span>
+              <div><strong>Гарантия предоставления необходимой информации</strong><p>Мы предоставим все материалы, необходимые вам для быстрого достижения результата.</p></div>
             </div>
           </div>
         </div>
@@ -763,7 +925,8 @@
   </main>
 
   <footer class="footer">© Usmanova Fit</footer>
-<div class="modal" id="modal" aria-hidden="true">
+
+  <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Программа</h3>
       <p id="modalText">Описание программы.</p>
@@ -846,16 +1009,10 @@
 
     modal.addEventListener("keydown", (event) => {
       if (!modal.classList.contains("open") || event.key !== "Tab") return;
-
-      const focusable = Array.from(
-        modal.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')
-      );
-
+      const focusable = Array.from(modal.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'));
       if (!focusable.length) return;
-
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -866,19 +1023,16 @@
     });
 
     modalClose.addEventListener("click", closeModal);
-
     modal.addEventListener("click", (event) => {
       if (event.target === modal) closeModal();
     });
 
     modalPick.addEventListener("click", () => {
       closeModal();
-
       if (selectedProgram && programs[selectedProgram]) {
         programInput.value = selectedProgram;
         goalSelect.value = programs[selectedProgram].goal;
       }
-
       scrollToTarget("#start");
       setTimeout(() => document.querySelector("input[name='name']").focus(), 350);
     });
@@ -893,7 +1047,6 @@
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
