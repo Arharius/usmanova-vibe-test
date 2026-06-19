@@ -289,39 +289,13 @@
     }
 
     .guarantee-item {
-      display: grid;
-      grid-template-columns: 50px 1fr;
-      gap: 16px;
-      align-items: center;
+      display: block;
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 22px;
       background: #fff;
     }
 
-    .icon {
-      width: 50px;
-      height: 50px;
-      min-width: 50px;
-      border-radius: 16px;
-      background: var(--soft);
-      color: var(--pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .icon svg {
-      width: 23px;
-      height: 23px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
 
     .guarantee-item strong {
       display: block;
@@ -629,16 +603,6 @@
         padding: 16px;
       }
 
-      .icon {
-        width: 44px;
-        height: 44px;
-        min-width: 44px;
-      }
-
-      .icon svg {
-        width: 21px;
-        height: 21px;
-      }
 
       .guarantee-item strong {
         font-size: 16px;
@@ -744,14 +708,6 @@
 
           <div class="guarantee-list">
             <div class="guarantee-item">
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M8 4h6.2a4.2 4.2 0 0 1 0 8.4H8"></path>
-                  <path d="M8 4v16"></path>
-                  <path d="M5 13h10"></path>
-                  <path d="M5 17h8"></path>
-                </svg>
-              </span>
               <div>
                 <strong>Гарантия цены</strong>
                 <span>Программа, материалы и поддержка собраны в одном формате.</span>
@@ -759,11 +715,6 @@
             </div>
 
             <div class="guarantee-item">
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M5 12.5l4.2 4.2L19 7"></path>
-                </svg>
-              </span>
               <div>
                 <strong>Гарантия результата</strong>
                 <span>Понятные задания помогают двигаться регулярно и видеть прогресс.</span>
@@ -771,13 +722,6 @@
             </div>
 
             <div class="guarantee-item">
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 10v7"></path>
-                  <path d="M12 7h.01"></path>
-                  <circle cx="12" cy="12" r="9"></circle>
-                </svg>
-              </span>
               <div>
                 <strong>Гарантия структуры</strong>
                 <span>Тренировки, питание и рекомендации находятся в одном месте.</span>
