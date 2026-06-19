@@ -3,856 +3,760 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Фитнес с Катей Усмановой</title>
-  <meta name="description" content="Онлайн-тренировки с Катей Усмановой — похудение, тонус и сила дома или в зале.">
+  <title>Usmanova Fit — подбор программы</title>
+  <meta name="description" content="Подбор фитнес-программы под цель и уровень подготовки.">
   <style>
     :root {
-      --bg: #fff7fb;
-      --dark: #151015;
-      --muted: #7a6873;
-      --pink: #f45aa0;
-      --pink-dark: #e53788;
-      --line: rgba(21,16,21,.1);
-      --card: rgba(255,255,255,.78);
-      --shadow: 0 24px 70px rgba(178, 34, 112, .16);
-      --radius-xl: 34px;
-      --radius-md: 22px;
+      --pink: #f45b9b;
+      --pink-dark: #ec3d88;
+      --text: #161216;
+      --muted: #7d747b;
+      --soft: #fff1f7;
+      --line: #eadfe5;
+      --white: #fff;
+      --radius: 34px;
+      --shadow: 0 22px 60px rgba(244, 91, 155, .16);
+      --container: 1240px;
     }
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      color: var(--dark);
-      background:
-        radial-gradient(circle at 12% 8%, rgba(244,90,160,.22), transparent 32rem),
-        radial-gradient(circle at 90% 4%, rgba(255,195,222,.52), transparent 35rem),
-        var(--bg);
+      font-family: Montserrat, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #fff;
+      overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    button, input, select, textarea {
+    button,
+    input,
+    textarea,
+    select {
       font: inherit;
     }
 
-    .wrap {
-      width: min(1180px, calc(100% - 32px));
+    .container {
+      width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(255,247,251,.76);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      height: 72px;
+    .screen {
+      min-height: 100vh;
+      padding: 72px 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      font-weight: 900;
-      letter-spacing: -.03em;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--pink), #ff9ccc);
-      box-shadow: 0 10px 24px rgba(244,90,160,.32);
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 900;
-    }
-
-    .navlinks {
-      display: flex;
-      gap: 26px;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .navlinks a:hover { color: var(--dark); }
 
     .btn {
+      min-height: 86px;
+      padding: 0 58px;
       border: 0;
+      border-radius: 999px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 54px;
-      padding: 0 24px;
-      border-radius: 999px;
-      font-weight: 900;
-      letter-spacing: -.02em;
-      background: var(--dark);
-      color: white;
-      box-shadow: 0 20px 40px rgba(21,16,21,.18);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      box-shadow: 0 18px 42px rgba(244, 91, 155, .22);
     }
 
     .btn:hover {
+      background: var(--pink-dark);
       transform: translateY(-2px);
-      box-shadow: 0 24px 50px rgba(21,16,21,.24);
+      box-shadow: 0 22px 54px rgba(244, 91, 155, .3);
     }
 
-    .btn.pink {
-      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
-      color: #fff;
-      box-shadow: 0 20px 45px rgba(244,90,160,.32);
-    }
+    .btn:active { transform: translateY(0); }
 
-    .btn.ghost {
-      background: rgba(255,255,255,.72);
-      color: var(--dark);
-      border: 1px solid var(--line);
-      box-shadow: none;
+    .btn.small {
+      min-height: 58px;
+      padding: 0 28px;
+      font-size: 15px;
+      letter-spacing: .05em;
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 56px 0 72px;
+      padding-top: 40px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr minmax(300px, 520px);
-      gap: 42px;
+      grid-template-columns: 53% 47%;
       align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-weight: 900;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--pink);
-      box-shadow: 0 0 0 7px rgba(244,90,160,.15);
-    }
-
-    h1, h2, h3, p {
-      margin: 0;
-    }
-
-    h1 {
-      margin-top: 24px;
-      max-width: 760px;
-      font-size: clamp(42px, 7vw, 92px);
-      line-height: .93;
-      letter-spacing: -.075em;
-    }
-
-    .accent {
-      color: var(--pink-dark);
+      min-height: calc(100vh - 80px);
+      position: relative;
     }
 
     .hero-copy {
-      margin-top: 24px;
-      max-width: 610px;
-      font-size: clamp(18px, 2vw, 24px);
-      line-height: 1.34;
-      color: #342833;
-      font-weight: 700;
-      letter-spacing: -.025em;
+      padding-left: clamp(0px, 4vw, 54px);
+      max-width: 690px;
+      z-index: 2;
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 28px 0 34px;
-    }
-
-    .chip {
-      padding: 12px 15px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid var(--line);
-      color: #4a3945;
+    .hero h1 {
+      margin: 0;
+      color: var(--pink);
+      font-size: clamp(42px, 4.8vw, 66px);
+      line-height: 1.18;
       font-weight: 800;
-      box-shadow: 0 8px 22px rgba(21,16,21,.05);
+      letter-spacing: .025em;
+      text-transform: uppercase;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
+    .hero-sub {
+      margin: 42px 0 0;
+      color: var(--pink);
+      font-size: clamp(27px, 2.6vw, 42px);
+      line-height: 1.28;
+      font-weight: 400;
     }
 
-    .hero-media {
+    .hero-text {
+      margin: 86px 0 0;
+      max-width: 610px;
+      color: var(--text);
+      font-size: clamp(22px, 1.8vw, 30px);
+      line-height: 1.35;
+      font-weight: 400;
+    }
+
+    .hero-action {
+      margin-top: 96px;
+    }
+
+    .vpn-note {
+      margin-top: 18px;
+      color: #918991;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .hero-figure {
       position: relative;
-      min-height: 620px;
-      border-radius: 44px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,219,235,.82)),
-        radial-gradient(circle at 50% 50%, #fff 0, transparent 48%);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      isolation: isolate;
+      min-height: 760px;
+      align-self: end;
     }
 
-    .hero-media:before {
+    .hero-figure img {
+      position: absolute;
+      right: -40px;
+      bottom: -34px;
+      width: min(720px, 115%);
+      max-width: none;
+      display: block;
+    }
+
+    .hero-figure::after {
       content: "";
       position: absolute;
-      inset: 34px 34px 80px;
-      border-radius: 44% 56% 48% 52%;
-      background: linear-gradient(135deg, rgba(244,90,160,.38), rgba(255,255,255,.22));
-      transform: rotate(-8deg);
-      z-index: -1;
+      left: 0;
+      right: -120px;
+      bottom: -40px;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 74%);
+      pointer-events: none;
     }
 
-    .hero-media img {
-      position: absolute;
-      right: -86px;
-      bottom: -20px;
-      width: min(720px, 128%);
-      max-width: none;
-      filter: drop-shadow(0 24px 35px rgba(21,16,21,.14));
-    }
-
-    .stat-card {
-      position: absolute;
-      left: 28px;
-      bottom: 28px;
-      width: min(82%, 330px);
-      padding: 22px;
-      border-radius: 28px;
-      background: rgba(255,255,255,.84);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,.7);
-      box-shadow: 0 18px 50px rgba(21,16,21,.12);
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 38px;
-      line-height: 1;
-      letter-spacing: -.05em;
-    }
-
-    .stat-card span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
+    .section-title {
+      margin: 0 0 52px;
+      color: var(--pink);
+      font-size: clamp(38px, 4.8vw, 68px);
+      line-height: 1.15;
       font-weight: 800;
-      line-height: 1.25;
-    }
-
-    section {
-      padding: 76px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 28px;
-      margin-bottom: 34px;
-    }
-
-    h2 {
-      font-size: clamp(34px, 5vw, 66px);
-      line-height: .96;
-      letter-spacing: -.065em;
-      max-width: 760px;
-    }
-
-    .section-lead {
-      max-width: 430px;
-      color: var(--muted);
-      font-weight: 700;
-      line-height: 1.45;
-      font-size: 17px;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+      max-width: 940px;
     }
 
     .programs {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(244,91,155,.12), transparent 38rem),
+        #fff;
+    }
+
+    .program-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 28px;
     }
 
     .program-card {
       position: relative;
-      min-height: 480px;
       overflow: hidden;
-      border-radius: var(--radius-xl);
-      background: white;
-      border: 1px solid rgba(255,255,255,.8);
+      min-height: 560px;
+      border-radius: 38px;
+      background: linear-gradient(180deg, #fff8fb 0%, #ffe6f1 100%);
       box-shadow: var(--shadow);
+      border: 1px solid rgba(244,91,155,.16);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .program-card:before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.35) 45%, rgba(21,16,21,.88) 100%),
-        radial-gradient(circle at 50% 12%, rgba(244,90,160,.16), transparent 32%);
-      z-index: 1;
+      justify-content: flex-end;
     }
 
     .program-card img {
       position: absolute;
-      inset: auto 0 0 0;
-      margin: auto;
-      width: 100%;
-      height: 76%;
+      left: 50%;
+      top: 18px;
+      width: 94%;
+      height: 68%;
+      transform: translateX(-50%);
       object-fit: contain;
-      object-position: bottom center;
-      transform: scale(1.04);
-    }
-
-    .badge {
-      position: relative;
-      z-index: 2;
-      align-self: flex-start;
-      margin: 18px;
-      padding: 9px 13px;
-      border-radius: 999px;
-      background: var(--pink);
-      color: white;
-      font-weight: 950;
-      font-size: 12px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
+      object-position: center bottom;
     }
 
     .program-body {
       position: relative;
       z-index: 2;
-      padding: 0 22px 22px;
-      color: white;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(255,255,255,.96), rgba(255,255,255,.76));
+      backdrop-filter: blur(8px);
     }
 
-    .program-body h3 {
+    .tag {
+      display: inline-flex;
+      margin-bottom: 14px;
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .program-card h3 {
+      margin: 0 0 12px;
       font-size: 31px;
-      line-height: 1;
-      letter-spacing: -.045em;
-      margin-bottom: 10px;
-    }
-
-    .program-body p {
-      color: rgba(255,255,255,.82);
-      line-height: 1.38;
-      font-weight: 650;
-      margin-bottom: 16px;
-    }
-
-    .program-body .btn {
-      min-height: 48px;
-      padding-inline: 18px;
-      width: 100%;
-      background: white;
-      color: var(--dark);
-      box-shadow: none;
-    }
-
-    .trust {
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .trust-panel,
-    .lead-panel {
-      border-radius: var(--radius-xl);
-      background: rgba(255,255,255,.76);
-      border: 1px solid rgba(255,255,255,.85);
-      box-shadow: var(--shadow);
-      padding: clamp(24px, 4vw, 46px);
-      overflow: hidden;
-    }
-
-    .trust-panel {
-      background:
-        radial-gradient(circle at 100% 0%, rgba(244,90,160,.22), transparent 22rem),
-        rgba(255,255,255,.78);
-    }
-
-    .trust-panel h2 { margin-bottom: 24px; }
-
-    .points {
-      display: grid;
-      gap: 12px;
-    }
-
-    .point {
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 13px;
-      align-items: start;
-      padding: 15px;
-      border-radius: 20px;
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-
-    .point-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: rgba(244,90,160,.14);
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      color: var(--pink-dark);
-    }
-
-    .point strong {
-      display: block;
+      line-height: 1.06;
+      font-weight: 800;
       letter-spacing: -.02em;
     }
 
-    .point span {
-      display: block;
-      margin-top: 4px;
+    .program-card p {
+      margin: 0 0 22px;
       color: var(--muted);
-      line-height: 1.35;
-      font-weight: 650;
+      font-size: 17px;
+      line-height: 1.42;
+      font-weight: 500;
     }
 
-    .lead-panel {
+    .guarantee-form {
       background:
-        linear-gradient(150deg, rgba(21,16,21,.92), rgba(46,28,42,.94)),
-        var(--dark);
-      color: white;
-      position: relative;
+        radial-gradient(circle at 100% 0%, rgba(244,91,155,.11), transparent 32rem),
+        #fff;
     }
 
-    .lead-panel:after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: rgba(244,90,160,.48);
-      filter: blur(12px);
+    .gf-grid {
+      display: grid;
+      grid-template-columns: 47% 53%;
+      gap: 42px;
+      align-items: stretch;
     }
 
-    .lead-panel h2,
-    .lead-panel p,
-    .lead-panel form {
-      position: relative;
-      z-index: 1;
+    .guarantees,
+    .form-panel {
+      border-radius: 42px;
+      padding: 48px;
     }
 
-    .lead-panel h2 {
-      color: white;
-      margin-bottom: 14px;
+    .guarantees {
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 56px rgba(0,0,0,.05);
     }
 
-    .lead-panel p {
-      color: rgba(255,255,255,.76);
-      font-size: 18px;
-      font-weight: 700;
+    .guarantees h2,
+    .form-panel h2 {
+      margin: 0;
+      font-size: clamp(36px, 3.4vw, 52px);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -.035em;
+    }
+
+    .guarantees h2 {
+      color: var(--text);
+    }
+
+    .guarantee-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .guarantee-item {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: var(--soft);
+      color: var(--pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-size: 24px;
+      font-weight: 800;
+      overflow: visible;
+    }
+
+    .guarantee-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 19px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .guarantee-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 17px;
       line-height: 1.4;
-      margin-bottom: 22px;
+      font-weight: 500;
+    }
+
+    .form-panel {
+      color: #fff;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(244,91,155,.36), transparent 16rem),
+        linear-gradient(145deg, #171018 0%, #2a1725 100%);
+      box-shadow: 0 24px 70px rgba(42, 23, 37, .18);
+    }
+
+    .form-panel h2 {
+      color: #fff;
+      max-width: 620px;
+    }
+
+    .form-lead {
+      margin: 22px 0 32px;
+      color: rgba(255,255,255,.76);
+      font-size: 20px;
+      line-height: 1.42;
+      font-weight: 600;
+      max-width: 600px;
     }
 
     form {
       display: grid;
-      gap: 12px;
+      gap: 18px;
     }
 
     label {
       display: grid;
-      gap: 7px;
+      gap: 8px;
       color: rgba(255,255,255,.82);
-      font-weight: 800;
-      font-size: 14px;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 700;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.1);
-      color: white;
+      min-height: 64px;
+      padding: 0 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 19px;
       outline: none;
-      min-height: 54px;
-      padding: 0 15px;
-      border-radius: 18px;
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
     }
 
     textarea {
-      min-height: 92px;
-      padding-top: 14px;
+      min-height: 116px;
+      padding-top: 18px;
       resize: vertical;
     }
 
     input::placeholder,
     textarea::placeholder {
-      color: rgba(255,255,255,.48);
+      color: rgba(255,255,255,.43);
     }
 
-    select option { color: #111; }
+    select option { color: var(--text); }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(244,91,155,.86);
+      box-shadow: 0 0 0 4px rgba(244,91,155,.18);
+    }
 
     .notice {
       display: none;
-      margin-top: 4px;
-      padding: 13px 15px;
-      border-radius: 18px;
-      background: rgba(92, 222, 147, .14);
-      border: 1px solid rgba(92, 222, 147, .28);
-      color: #b8ffd5;
-      font-weight: 800;
-      line-height: 1.3;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(87, 211, 136, .13);
+      border: 1px solid rgba(87, 211, 136, .32);
+      color: #c9ffdd;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 700;
     }
 
     .notice.show {
       display: block;
     }
 
-    .footer {
-      padding: 40px 0 60px;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
     .modal {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 20;
       display: none;
       place-items: center;
-      padding: 20px;
-      background: rgba(21,16,21,.58);
-      backdrop-filter: blur(10px);
+      padding: 24px;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(8px);
     }
 
-    .modal.open { display: grid; }
+    .modal.open {
+      display: grid;
+    }
 
     .modal-card {
       width: min(520px, 100%);
       border-radius: 30px;
-      background: white;
-      box-shadow: 0 30px 90px rgba(21,16,21,.3);
-      padding: 28px;
+      background: #fff;
+      padding: 34px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.22);
     }
 
     .modal-card h3 {
+      margin: 0 0 14px;
       font-size: 34px;
-      line-height: 1;
-      letter-spacing: -.05em;
-      margin-bottom: 12px;
+      line-height: 1.08;
+      font-weight: 800;
     }
 
     .modal-card p {
+      margin: 0 0 24px;
       color: var(--muted);
-      font-weight: 700;
-      line-height: 1.42;
-      margin-bottom: 20px;
+      font-size: 18px;
+      line-height: 1.45;
+      font-weight: 500;
     }
 
     .modal-actions {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    .mobile-cta { display: none; }
+    .footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
 
-    @media (max-width: 980px) {
+    .mobile-sticky {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
       .hero-grid,
-      .trust {
+      .gf-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding-top: 32px;
+      .hero-copy {
+        padding-left: 0;
       }
 
-      .hero-media {
-        min-height: 520px;
+      .hero-figure {
+        min-height: 560px;
       }
 
-      .hero-media img {
-        right: -30px;
-        width: min(610px, 112%);
+      .hero-figure img {
+        right: 50%;
+        transform: translateX(50%);
+        width: min(650px, 105%);
       }
 
-      .programs {
+      .program-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
       }
     }
 
-    @media (max-width: 640px) {
-      .wrap {
-        width: min(100% - 22px, 1180px);
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, var(--container));
       }
 
-      .nav {
-        height: auto;
-        padding: 16px 0;
-      }
-
-      .navlinks {
-        display: none;
-      }
-
-      .nav .btn {
-        min-height: 44px;
-        padding: 0 14px;
-        font-size: 13px;
-      }
-
-      .hero {
-        padding: 26px 0 48px;
-      }
-
-      h1 {
-        font-size: clamp(41px, 14vw, 58px);
-      }
-
-      .hero-copy {
-        font-size: 17px;
-      }
-
-      .chips {
-        margin: 22px 0 24px;
-      }
-
-      .chip {
-        width: 100%;
-        padding: 11px 13px;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .hero-media {
-        min-height: 430px;
-        border-radius: 30px;
-      }
-
-      .hero-media img {
-        right: -72px;
-        width: 620px;
-      }
-
-      .stat-card {
-        left: 14px;
-        bottom: 14px;
-        width: calc(100% - 28px);
-        padding: 16px;
-        border-radius: 22px;
-      }
-
-      section {
+      .screen {
+        min-height: auto;
         padding: 52px 0;
       }
 
-      h2 {
-        font-size: clamp(34px, 12vw, 48px);
+      .hero {
+        padding-top: 28px;
       }
 
-      .programs {
+      .hero-grid {
+        min-height: auto;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+        line-height: 1.18;
+      }
+
+      .hero-sub {
+        margin-top: 24px;
+        font-size: 23px;
+      }
+
+      .hero-text {
+        margin-top: 38px;
+        font-size: 19px;
+      }
+
+      .hero-action {
+        margin-top: 42px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 68px;
+        padding: 0 24px;
+        font-size: 17px;
+      }
+
+      .btn.small {
+        min-height: 54px;
+        font-size: 14px;
+      }
+
+      .vpn-note {
+        font-size: 15px;
+        text-align: center;
+      }
+
+      .hero-figure {
+        min-height: 380px;
+        margin-top: 18px;
+      }
+
+      .hero-figure img {
+        width: 470px;
+        right: 43%;
+        bottom: -18px;
+      }
+
+      .section-title {
+        margin-bottom: 28px;
+        font-size: 33px;
+      }
+
+      .program-grid {
         display: flex;
         overflow-x: auto;
-        gap: 14px;
-        padding-bottom: 10px;
+        gap: 16px;
+        padding-bottom: 12px;
         scroll-snap-type: x mandatory;
       }
 
       .program-card {
         flex: 0 0 86%;
-        min-height: 440px;
+        min-height: 500px;
+        border-radius: 30px;
         scroll-snap-align: start;
       }
 
-      .trust-panel,
-      .lead-panel {
-        border-radius: 28px;
-        padding: 22px;
+      .program-body {
+        padding: 24px;
       }
 
-      .point {
-        grid-template-columns: 36px 1fr;
-        padding: 13px;
+      .program-card h3 {
+        font-size: 27px;
       }
 
-      .point-icon {
-        width: 36px;
-        height: 36px;
+      .guarantees,
+      .form-panel {
+        border-radius: 30px;
+        padding: 26px;
       }
 
-      body { padding-bottom: 80px; }
+      .guarantees h2,
+      .form-panel h2 {
+        font-size: 34px;
+      }
 
-      .mobile-cta {
-        display: block;
+      .form-lead {
+        font-size: 17px;
+        margin-bottom: 24px;
+      }
+
+      .guarantee-item {
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+        padding: 17px;
+      }
+
+      .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 15px;
+        font-size: 20px;
+      }
+
+      .guarantee-item strong {
+        font-size: 17px;
+      }
+
+      .guarantee-item span {
+        font-size: 15px;
+      }
+
+      input,
+      select,
+      textarea {
+        min-height: 58px;
+        font-size: 16px;
+      }
+
+      .mobile-sticky {
         position: fixed;
-        bottom: 0; left: 0; right: 0;
-        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-        background: rgba(255,247,251,.92);
-        backdrop-filter: blur(12px);
-        border-top: 1px solid var(--line);
-        z-index: 40;
+        z-index: 15;
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        display: block;
+      }
+
+      .mobile-sticky .btn {
+        min-height: 58px;
+        box-shadow: 0 14px 38px rgba(244,91,155,.34);
+      }
+
+      .footer {
+        padding-bottom: 92px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <nav class="wrap nav" aria-label="Главная навигация">
-      <a class="brand" href="#top" aria-label="На главный экран">
-        <span class="brand-mark">U</span>
-        <span>Usmanova Fit</span>
-      </a>
-      <div class="navlinks">
-        <a href="#programs">Программы</a>
-        <a href="#start">Подбор</a>
-        <a href="#contacts">Контакты</a>
-      </div>
-      <a class="btn pink" href="#start">Выбрать программу</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap hero-grid">
-        <div>
-          <span class="eyebrow"><span class="dot"></span> без диет, голода и запретов</span>
-          <h1 id="hero-title">Приведите тело в форму с чемпионкой <span class="accent">Катей Усмановой</span></h1>
-          <p class="hero-copy">
-            Похудеть, подтянуть попу и живот, набрать форму в зале, восстановиться после родов —
-            тренировки и питание под вашу цель.
-          </p>
-          <div class="chips" aria-label="Преимущества">
-            <span class="chip">С пользой для здоровья</span>
-            <span class="chip">Дома или в зале</span>
-            <span class="chip">Под любой уровень</span>
-          </div>
-          <div class="hero-actions">
-            <a class="btn pink" href="#programs">Выбрать программу</a>
-            <a class="btn ghost" href="#start">Быстрый подбор</a>
+  <main>
+    <section class="hero screen" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Приведите тело в форму<br>с чемпионкой Катей<br>Усмановой</h1>
+          <p class="hero-sub">без диет, голода и запретов<br>с пользой для здоровья</p>
+          <p class="hero-text">Похудеть, подтянуть попу и живот, набрать форму в зале, восстановиться после родов — тренировки и питание под вашу цель</p>
+          <div class="hero-action">
+            <a class="btn" href="#programs">Выбрать программу</a>
+            <div class="vpn-note">Для корректной работы сайта отключите VPN</div>
           </div>
         </div>
-
-        <div class="hero-media" aria-hidden="true">
-          <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/8d7e3aa384b597937b9504925ead6325.png/s/s1200x/a/934144/sc/68" alt="">
-          <div class="stat-card">
-            <strong>580 000+</strong>
-            <span>участниц уже тренируются с Катей</span>
-          </div>
+        <div class="hero-figure" aria-label="Катя Усманова">
+          <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/8d7e3aa384b597937b9504925ead6325.png/s/s1200x/a/934144/sc/68" alt="Катя Усманова с гантелью">
         </div>
       </div>
     </section>
 
-    <section id="programs" aria-labelledby="programs-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 id="programs-title">Тренировки дома</h2>
-          <p class="section-lead">Работа дома или в зале — выберите программу под цель и уровень.</p>
-        </div>
+    <section class="programs screen" id="programs">
+      <div class="container">
+        <h2 class="section-title">Выберите программу<br>под вашу цель</h2>
 
-        <div class="programs">
+        <div class="program-grid">
           <article class="program-card">
-            <span class="badge">Флагман</span>
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/129/h/9993958238de93cfb42027db3748b8fe.png" alt="Метод Усмановой">
             <div class="program-body">
+              <span class="tag">Флагман</span>
               <h3>Метод Усмановой</h3>
-              <p>Освоите технику и втянетесь в регулярные тренировки без травм и через силу.</p>
-              <button class="btn" type="button" data-open-modal="Метод Усмановой">Подробнее</button>
+              <p>Базовая программа для входа в регулярные тренировки и безопасного старта.</p>
+              <button class="btn small" type="button" data-program="Метод Усмановой">Подробнее</button>
             </div>
           </article>
 
           <article class="program-card">
-            <span class="badge">Марафон</span>
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/243/h/b425fe3374dfff385aa5305db7156a5f.png" alt="Марафон стройности">
             <div class="program-body">
+              <span class="tag">Марафон</span>
               <h3>Марафон стройности</h3>
-              <p>Первый видимый результат за 21 день: тонус, лёгкость и старт без перегруза.</p>
-              <button class="btn" type="button" data-open-modal="Марафон стройности">Подробнее</button>
+              <p>Формат для первых видимых изменений: тонус, лёгкость и регулярность.</p>
+              <button class="btn small" type="button" data-program="Марафон стройности">Подробнее</button>
             </div>
           </article>
 
           <article class="program-card">
-            <span class="badge">Марафон</span>
             <img src="https://fs.getcourse.ru/fileservice/file/download/a/934144/sc/265/h/d8acf94578d7aa9c71f7b487c818a4b4.png" alt="Упругая попа 1.0">
             <div class="program-body">
+              <span class="tag">Ягодицы</span>
               <h3>Упругая попа 1.0</h3>
-              <p>Первый объём и подтянутость ягодиц с собственным весом.</p>
-              <button class="btn" type="button" data-open-modal="Упругая попа 1.0">Подробнее</button>
+              <p>Программа для ягодиц с акцентом на форму, тонус и понятную технику.</p>
+              <button class="btn small" type="button" data-program="Упругая попа 1.0">Подробнее</button>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="start" aria-labelledby="start-title">
-      <div class="wrap trust">
-        <div class="trust-panel">
-          <h2>Программы Кати Усмановой — это всегда гарантия</h2>
-          <div class="points">
-            <div class="point">
-              <span class="point-icon" aria-hidden="true">₽</span>
-              <div><strong>Гарантия лучшей цены</strong><span>Лояльная цена для комплекта тренировок с глубоким содержанием.</span></div>
+    <section class="guarantee-form screen" id="start">
+      <div class="container gf-grid">
+        <div class="guarantees">
+          <h2>Программы Кати Усмановой — это гарантия</h2>
+
+          <div class="guarantee-list">
+            <div class="guarantee-item">
+              <span class="icon" aria-hidden="true">₽</span>
+              <div>
+                <strong>Гарантия цены</strong>
+                <span>Программа, материалы и поддержка собраны в одном формате.</span>
+              </div>
             </div>
-            <div class="point">
-              <span class="point-icon" aria-hidden="true">✓</span>
-              <div><strong>Гарантия результата</strong><span>Задания и рекомендации помогают закреплять прогресс.</span></div>
+
+            <div class="guarantee-item">
+              <span class="icon" aria-hidden="true">✓</span>
+              <div>
+                <strong>Гарантия результата</strong>
+                <span>Понятные задания помогают двигаться регулярно и видеть прогресс.</span>
+              </div>
             </div>
-            <div class="point">
-              <span class="point-icon" aria-hidden="true">i</span>
-              <div><strong>Гарантия информации</strong><span>Материалы по питанию и тренировкам собраны в одном месте.</span></div>
+
+            <div class="guarantee-item">
+              <span class="icon" aria-hidden="true">i</span>
+              <div>
+                <strong>Гарантия структуры</strong>
+                <span>Тренировки, питание и рекомендации находятся в одном месте.</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="lead-panel" id="contacts">
-          <h2 id="start-title">Не знаете, с чего начать?</h2>
-          <p>Оставьте заявку. Подберём программу под цель и уровень. Это бесплатно и быстро.</p>
+        <div class="form-panel">
+          <h2>Не знаете, с чего начать?</h2>
+          <p class="form-lead">Оставьте заявку. Подберём программу под вашу цель и уровень подготовки.</p>
 
-          <form id="leadForm" name="program-pick">
+          <form id="leadForm">
+            <input type="hidden" name="program" id="programInput" value="">
+
             <label>
               Имя
               <input name="name" autocomplete="name" placeholder="Например, Анна" required>
@@ -880,108 +784,121 @@
               <textarea name="comment" placeholder="Опыт, ограничения, желаемый результат"></textarea>
             </label>
 
-            <button class="btn pink" type="submit">Подобрать программу</button>
-            <div id="formNotice" class="notice" role="status">Заявка принята! Мы свяжемся с вами в ближайшее время.</div>
+            <button class="btn" type="submit" id="submitBtn">Подобрать программу</button>
+            <div class="notice" id="notice" role="status">Заявка принята. Мы свяжемся с вами для подбора программы.</div>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      © 2024 Катя Усманова. Все права защищены.
-    </div>
-  </footer>
+  <footer class="footer">© Usmanova Fit</footer>
 
-  <div class="mobile-cta" aria-hidden="true">
-    <a class="btn pink" href="#start" style="width:100%">Выбрать программу</a>
+  <div class="mobile-sticky">
+    <a class="btn" href="#start">Подобрать программу</a>
   </div>
 
-  <div class="modal" id="programModal" aria-hidden="true">
+  <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Программа</h3>
-      <p id="modalText">Краткое описание программы. Нажмите кнопку ниже, чтобы перейти к форме подбора.</p>
+      <p id="modalText">Описание программы.</p>
       <div class="modal-actions">
-        <a class="btn pink" href="#start" id="modalPick">Подобрать</a>
-        <button class="btn ghost" type="button" id="modalClose">Закрыть</button>
+        <a class="btn small" href="#start" id="modalPick">Подобрать</a>
+        <button class="btn small" type="button" id="modalClose">Закрыть</button>
       </div>
     </div>
   </div>
 
   <script>
-    const modal = document.querySelector("#programModal");
+    const programs = {
+      "Метод Усмановой": {
+        text: "Базовый вход в систему тренировок: техника, регулярность, питание и безопасный старт.",
+        goal: "Похудеть"
+      },
+      "Марафон стройности": {
+        text: "Короткий формат для запуска режима, тонуса и первых видимых изменений.",
+        goal: "Похудеть"
+      },
+      "Упругая попа 1.0": {
+        text: "Программа с акцентом на ягодицы: форма, тонус, техника и регулярность.",
+        goal: "Подтянуть ягодицы"
+      }
+    };
+
+    const modal = document.querySelector("#modal");
     const modalTitle = document.querySelector("#modalTitle");
     const modalText = document.querySelector("#modalText");
     const modalClose = document.querySelector("#modalClose");
     const modalPick = document.querySelector("#modalPick");
-    let modalTrigger = null;
+    const form = document.querySelector("#leadForm");
+    const notice = document.querySelector("#notice");
+    const programInput = document.querySelector("#programInput");
+    const goalSelect = document.querySelector("select[name='goal']");
+    const submitBtn = document.querySelector("#submitBtn");
 
-    const descriptions = {
-      "Метод Усмановой": "Базовая программа для входа в регулярные тренировки. Акцент на технику, привычку и безопасный старт.",
-      "Марафон стройности": "Формат для старта с нуля. Цель — первые видимые изменения, тонус и дисциплина за короткий срок.",
-      "Упругая попа 1.0": "Программа для ягодиц с собственным весом. Подходит тем, кто впервые работает над формой целенаправленно."
-    };
+    let selectedProgram = "";
 
-    function getFocusable() {
-      return Array.from(modal.querySelectorAll(
-        'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
-      ));
+    function scrollToTarget(selector) {
+      const target = document.querySelector(selector);
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    function trapFocus(e) {
-      if (e.key !== "Tab" || !modal.classList.contains("open")) return;
-      const focusable = getFocusable();
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault(); last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault(); first.focus();
-      }
-    }
+    document.querySelectorAll("a[href^='#']").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const selector = link.getAttribute("href");
+        const target = document.querySelector(selector);
+        if (!target) return;
+        event.preventDefault();
+        closeModal();
+        scrollToTarget(selector);
+      });
+    });
 
-    function openModal(title, trigger) {
-      modalTrigger = trigger || document.activeElement;
-      modalTitle.textContent = title;
-      modalText.textContent = descriptions[title] || "Описание программы.";
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      modalClose.focus();
-      document.addEventListener("keydown", trapFocus);
-    }
+    document.querySelectorAll("[data-program]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const name = button.dataset.program;
+        selectedProgram = name;
+        programInput.value = name;
+        modalTitle.textContent = name;
+        modalText.textContent = programs[name].text;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        modalClose.focus();
+      });
+    });
 
     function closeModal() {
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
-      document.removeEventListener("keydown", trapFocus);
-      if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
     }
 
-    document.querySelectorAll("[data-open-modal]").forEach((button) => {
-      button.addEventListener("click", () => openModal(button.dataset.openModal, button));
-    });
-
     modalClose.addEventListener("click", closeModal);
+
     modal.addEventListener("click", (event) => {
       if (event.target === modal) closeModal();
     });
 
-    modalPick.addEventListener("click", () => {
+    modalPick.addEventListener("click", (event) => {
+      event.preventDefault();
       closeModal();
-      const goal = document.querySelector("select[name='goal']");
-      if (goal && !goal.value) goal.value = "Похудеть";
+
+      if (selectedProgram && programs[selectedProgram]) {
+        programInput.value = selectedProgram;
+        goalSelect.value = programs[selectedProgram].goal;
+      }
+
+      scrollToTarget("#start");
+      setTimeout(() => document.querySelector("input[name='name']").focus(), 420);
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeModal();
     });
 
-    const form = document.querySelector("#leadForm");
-    const notice = document.querySelector("#formNotice");
-
-    form.addEventListener("input", () => notice.classList.remove("show"));
+    form.addEventListener("input", () => {
+      notice.classList.remove("show");
+    });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -991,14 +908,22 @@
         return;
       }
 
-      const data = new FormData(form);
-      const payload = Object.fromEntries(data.entries());
-      const saved = JSON.parse(localStorage.getItem("usmanova-leads") || "[]");
-      saved.push({ ...payload, createdAt: new Date().toISOString() });
-      localStorage.setItem("usmanova-leads", JSON.stringify(saved));
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Отправляем...";
 
-      notice.classList.add("show");
-      form.reset();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const leads = JSON.parse(localStorage.getItem("usmanova-leads") || "[]");
+      leads.push({ ...data, createdAt: new Date().toISOString() });
+      localStorage.setItem("usmanova-leads", JSON.stringify(leads));
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Подобрать программу";
+        notice.classList.add("show");
+        form.reset();
+        selectedProgram = "";
+        programInput.value = "";
+      }, 450);
     });
   </script>
 </body>
