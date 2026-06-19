@@ -18,4 +18,4 @@
 
 1. Загрузить файлы в корень ветки `main`.
 2. Settings → Pages → Deploy from a branch.
-3. Branch: `main`, folder: `/root`.
+3. Branch: `main`, folder: `/(root)`.
