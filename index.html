@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Фитнес с Катей Усмановой — демо</title>
-  <meta name="description" content="Демо-копия трёх экранов лендинга для тестового задания.">
+  <title>Фитнес с Катей Усмановой</title>
+  <meta name="description" content="Онлайн-тренировки с Катей Усмановой — похудение, тонус и сила дома или в зале.">
   <style>
     :root {
       --bg: #fff7fb;
@@ -593,6 +593,8 @@
       flex-wrap: wrap;
     }
 
+    .mobile-cta { display: none; }
+
     @media (max-width: 980px) {
       .hero-grid,
       .trust {
@@ -625,10 +627,6 @@
     @media (max-width: 640px) {
       .wrap {
         width: min(100% - 22px, 1180px);
-      }
-
-      .topbar {
-        position: static;
       }
 
       .nav {
@@ -726,6 +724,19 @@
         width: 36px;
         height: 36px;
       }
+
+      body { padding-bottom: 80px; }
+
+      .mobile-cta {
+        display: block;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        background: rgba(255,247,251,.92);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--line);
+        z-index: 40;
+      }
     }
   </style>
 </head>
@@ -762,7 +773,7 @@
           </div>
           <div class="hero-actions">
             <a class="btn pink" href="#programs">Выбрать программу</a>
-            <button class="btn ghost" type="button" data-open-modal="Метод Усмановой">Быстрый подбор</button>
+            <a class="btn ghost" href="#start">Быстрый подбор</a>
           </div>
         </div>
 
@@ -780,7 +791,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2 id="programs-title">Тренировки дома</h2>
-          <p class="section-lead">Повторены карточки витрины: крупное фото, яркий бейдж, короткое обещание результата и рабочие кнопки.</p>
+          <p class="section-lead">Работа дома или в зале — выберите программу под цель и уровень.</p>
         </div>
 
         <div class="programs">
@@ -823,15 +834,15 @@
           <h2>Программы Кати Усмановой — это всегда гарантия</h2>
           <div class="points">
             <div class="point">
-              <span class="point-icon">₽</span>
+              <span class="point-icon" aria-hidden="true">₽</span>
               <div><strong>Гарантия лучшей цены</strong><span>Лояльная цена для комплекта тренировок с глубоким содержанием.</span></div>
             </div>
             <div class="point">
-              <span class="point-icon">✓</span>
+              <span class="point-icon" aria-hidden="true">✓</span>
               <div><strong>Гарантия результата</strong><span>Задания и рекомендации помогают закреплять прогресс.</span></div>
             </div>
             <div class="point">
-              <span class="point-icon">i</span>
+              <span class="point-icon" aria-hidden="true">i</span>
               <div><strong>Гарантия информации</strong><span>Материалы по питанию и тренировкам собраны в одном месте.</span></div>
             </div>
           </div>
@@ -841,8 +852,7 @@
           <h2 id="start-title">Не знаете, с чего начать?</h2>
           <p>Оставьте заявку. Подберём программу под цель и уровень. Это бесплатно и быстро.</p>
 
-          <form id="leadForm" name="program-pick" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="program-pick">
+          <form id="leadForm" name="program-pick">
             <label>
               Имя
               <input name="name" autocomplete="name" placeholder="Например, Анна" required>
@@ -871,7 +881,7 @@
             </label>
 
             <button class="btn pink" type="submit">Подобрать программу</button>
-            <div id="formNotice" class="notice" role="status">Заявка принята. Демо-форма сработала, данные сохранены локально.</div>
+            <div id="formNotice" class="notice" role="status">Заявка принята! Мы свяжемся с вами в ближайшее время.</div>
           </form>
         </div>
       </div>
@@ -880,12 +890,16 @@
 
   <footer class="footer">
     <div class="wrap">
-      Демо для тестового задания. Три экрана: hero, витрина программ, CTA/form. Кнопки открывают модалку или скроллят. Форма валидируется и показывает успешную отправку.
+      © 2024 Катя Усманова. Все права защищены.
     </div>
   </footer>
 
-  <div class="modal" id="programModal" aria-hidden="true" role="dialog" aria-label="Описание программы">
-    <div class="modal-card">
+  <div class="mobile-cta" aria-hidden="true">
+    <a class="btn pink" href="#start" style="width:100%">Выбрать программу</a>
+  </div>
+
+  <div class="modal" id="programModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Программа</h3>
       <p id="modalText">Краткое описание программы. Нажмите кнопку ниже, чтобы перейти к форме подбора.</p>
       <div class="modal-actions">
@@ -901,6 +915,7 @@
     const modalText = document.querySelector("#modalText");
     const modalClose = document.querySelector("#modalClose");
     const modalPick = document.querySelector("#modalPick");
+    let modalTrigger = null;
 
     const descriptions = {
       "Метод Усмановой": "Базовая программа для входа в регулярные тренировки. Акцент на технику, привычку и безопасный старт.",
@@ -908,21 +923,44 @@
       "Упругая попа 1.0": "Программа для ягодиц с собственным весом. Подходит тем, кто впервые работает над формой целенаправленно."
     };
 
-    function openModal(title) {
+    function getFocusable() {
+      return Array.from(modal.querySelectorAll(
+        'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
+      ));
+    }
+
+    function trapFocus(e) {
+      if (e.key !== "Tab" || !modal.classList.contains("open")) return;
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+
+    function openModal(title, trigger) {
+      modalTrigger = trigger || document.activeElement;
       modalTitle.textContent = title;
       modalText.textContent = descriptions[title] || "Описание программы.";
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       modalClose.focus();
+      document.addEventListener("keydown", trapFocus);
     }
 
     function closeModal() {
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
+      document.removeEventListener("keydown", trapFocus);
+      if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
     }
 
     document.querySelectorAll("[data-open-modal]").forEach((button) => {
-      button.addEventListener("click", () => openModal(button.dataset.openModal));
+      button.addEventListener("click", () => openModal(button.dataset.openModal, button));
     });
 
     modalClose.addEventListener("click", closeModal);
@@ -943,11 +981,9 @@
     const form = document.querySelector("#leadForm");
     const notice = document.querySelector("#formNotice");
 
-    function encode(data) {
-      return new URLSearchParams(data).toString();
-    }
+    form.addEventListener("input", () => notice.classList.remove("show"));
 
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (!form.checkValidity()) {
@@ -957,21 +993,9 @@
 
       const data = new FormData(form);
       const payload = Object.fromEntries(data.entries());
-      const saved = JSON.parse(localStorage.getItem("usmanova-demo-leads") || "[]");
+      const saved = JSON.parse(localStorage.getItem("usmanova-leads") || "[]");
       saved.push({ ...payload, createdAt: new Date().toISOString() });
-      localStorage.setItem("usmanova-demo-leads", JSON.stringify(saved));
-
-      try {
-        if (location.protocol.startsWith("http")) {
-          await fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode(data)
-          });
-        }
-      } catch (error) {
-        console.info("Demo form local fallback:", error);
-      }
+      localStorage.setItem("usmanova-leads", JSON.stringify(saved));
 
       notice.classList.add("show");
       form.reset();
